@@ -41,3 +41,28 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.ilk
+test1/test1/Debug/test1.exe
+*.pdb
+*.sdf
+test1/test1/test1.sln
+*.ipch
+*.lastbuildstate
+*.tlog
+test1/test1/test1/Release/stdafx.obj
+test1/test1/test1.sln.docstates.suo
+test1/test1/test1/Debug/test1.Build.CppClean.log
+*.manifest
+test1/test1/test1/Release/test1.pch
+*.log
+test1/test1/test1/test1.vcxproj.filters
+test1/test1/test1/test1.vcxproj.user
+*.vcxproj
+*.idb
+test1/test1/test1/Debug/test1_manifest.rc
+*.cache
+test1/test1/test1/Debug/test1.exe.embed.manifest.res
+*.pch
+*.obj
+test1/test1/test1/Release/test1.unsuccessfulbuild
+*.suo
