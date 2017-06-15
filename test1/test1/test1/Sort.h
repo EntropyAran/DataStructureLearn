@@ -2,7 +2,7 @@
 #include <algorithm>
 
 
-//≤Â»Î≈≈–Ú∫Ø ˝
+//≤Â»Î≈≈–Ú
 template<typename T>
 void InsertSort( T arr[], int n)
 {
@@ -21,7 +21,7 @@ void InsertSort( T arr[], int n)
 	return;
 }
 
-//—°‘Ò≈≈–Ú∫Ø ˝
+//—°‘Ò≈≈–Ú
 template<typename T>
 void SelectionSort( T arr[], int n)
 {
@@ -38,6 +38,7 @@ void SelectionSort( T arr[], int n)
 	return;
 }
 
+//√∞≈›≈≈–Ú
 template<typename T>
 void BubbleSort( T arr[], int n)
 {
@@ -49,4 +50,23 @@ void BubbleSort( T arr[], int n)
 				swap(arr[j], arr[j+1]);
 			}
 		}
+}
+
+//œ£∂˚≈≈–Ú
+template<typename T>
+void ShellSort(T arr[], int n)
+{
+	for(int gap=n/2; gap>=1; gap/=2)
+		for(int i=gap; i<n; i++)
+		{
+			int j;
+			T temp = arr[i];
+			// ∂‘ arr[i], arr[i-h], arr[i-2*h], arr[i-3*h]...  π”√≤Â»Î≈≈–Ú
+			for(j=i; j>=gap && arr[j-gap]>temp; j-=gap )
+				arr[j] = arr[j-gap];
+
+			arr[j] = temp;
+		}
+
+	return;
 }
