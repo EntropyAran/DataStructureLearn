@@ -38,7 +38,7 @@ namespace test1
 
 	//运行排序函数并计算耗时
 	//template<typename T>
-	void SortTestor( string FunName, void (*sort)(int [],int ), int arr[], int num )
+	void testSort( string FunName, void (*sort)(int [],int ), int arr[], int num )
 	{
 		clock_t sort_begin_time = clock();
 		sort(arr, num);
