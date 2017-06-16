@@ -1,3 +1,6 @@
+//
+//created by ryoishiki
+//
 
 #include <algorithm>
 
@@ -69,4 +72,66 @@ void ShellSort(T arr[], int n)
 		}
 
 	return;
+}
+
+// 将arr[l...mid]和arr[mid+1...r]两部分进行归并
+template<typename T>
+void __merge(T arr[], int l, int r, int mid)
+{
+	T *aux = new T[r-l+1];
+
+	for(int i=l; i<=r; i++)
+		aux[i-l] = arr[i];
+
+	int i = l;
+	int j = mid + 1;
+	for(int k = l; k<=r; k++)
+	{
+		if (i > mid)//如果左半部分已经处理完毕
+		{
+			arr[k] = aux[j-l];
+			j++;
+		}
+		else if (j > r)//如果右半部分已经处理完毕
+		{
+			arr[k] = aux[i-l];
+			i++;
+		}
+		else if(aux[i-l] < aux[j-l])//如果左边元素大于右边元素
+		{
+			arr[k] = aux[i-l];
+			i++;
+		}
+		else
+		{
+			arr[k] = aux[j-l];
+			j++;
+		}
+	}
+
+	delete []aux;aux = NULL;
+	return;
+}
+
+//对范围是[l,r]的数组进行归并
+template<typename T>
+void __mergeSort(T arr[], int l, int r)
+{
+	if(l >= r)
+		return;
+
+	int mid = (r + l) / 2;
+
+	//注意左闭右闭
+	__mergeSort(arr, l, mid);
+	__mergeSort(arr, mid+1, r);
+
+	__merge(arr, l, r, mid);
+}
+
+//归并排序
+template<typename T>
+void MergeSort(T arr[], int n)
+{
+	__mergeSort(arr, 0, n-1);//注意左闭右闭
 }
