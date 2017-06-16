@@ -66,3 +66,12 @@ test1/test1/test1/Debug/test1.exe.embed.manifest.res
 *.obj
 test1/test1/test1/Release/test1.unsuccessfulbuild
 *.suo
+*.opensdf
+*.sln
+test1/Debug/test1.exe
+*.exe
+test1/test1/test1.vcxproj.user
+*.filters
+test1/test1/Debug/test1_manifest.rc
+*.res
+test1/test1/ReadMe.txt

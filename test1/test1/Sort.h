@@ -24,6 +24,25 @@ void InsertSort( T arr[], int n)
 	return;
 }
 
+//插入排序
+template<typename T>
+void InsertSort( T arr[], int l, int r)
+{
+	T temp;
+
+	for ( int i=l+1; i<=r; i++)
+	{
+		int j;
+		temp = arr[i];
+		for ( j=i; j>l && temp < arr[j-1]; j--)
+			arr[j] = arr[j-1];
+
+		arr[j] = temp;
+	}
+
+	return;
+}
+
 //选择排序
 template<typename T>
 void SelectionSort( T arr[], int n)
@@ -117,8 +136,15 @@ void __merge(T arr[], int l, int r, int mid)
 template<typename T>
 void __mergeSort(T arr[], int l, int r)
 {
-	if(l >= r)
+	
+	/*if(l >= r)
+		return;*/
+
+	if(r - l < 15)//当分裂的数组小到一定时用插入排序或许更快，因为此时的数组更加有序
+	{
+		InsertSort(arr, l, r);
 		return;
+	}
 
 	int mid = (r + l) / 2;
 
@@ -126,7 +152,8 @@ void __mergeSort(T arr[], int l, int r)
 	__mergeSort(arr, l, mid);
 	__mergeSort(arr, mid+1, r);
 
-	__merge(arr, l, r, mid);
+	if(arr[mid] > arr[mid+1])//如果arr[mid]<=arr[mid+1]时，说明两边已经有序了 //适用于近乎有序的数组
+		__merge(arr, l, r, mid);
 }
 
 //归并排序
