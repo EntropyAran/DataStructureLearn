@@ -95,7 +95,7 @@ void ShellSort(T arr[], int n)
 
 // 将arr[l...mid]和arr[mid+1...r]两部分进行归并
 template<typename T>
-void __merge(T arr[], int l, int r, int mid)
+void __merge(T arr[], int l, int mid, int r)
 {
 	T *aux = new T[r-l+1];
 
@@ -136,10 +136,10 @@ void __merge(T arr[], int l, int r, int mid)
 template<typename T>
 void __mergeSort(T arr[], int l, int r)
 {
-	
 	/*if(l >= r)
 		return;*/
 
+	//优化1
 	if(r - l < 15)//当分裂的数组小到一定时用插入排序或许更快，因为此时的数组更加有序
 	{
 		InsertSort(arr, l, r);
@@ -152,8 +152,9 @@ void __mergeSort(T arr[], int l, int r)
 	__mergeSort(arr, l, mid);
 	__mergeSort(arr, mid+1, r);
 
+	//优化2
 	if(arr[mid] > arr[mid+1])//如果arr[mid]<=arr[mid+1]时，说明两边已经有序了 //适用于近乎有序的数组
-		__merge(arr, l, r, mid);
+		__merge(arr, l, mid, r);
 }
 
 //归并排序
@@ -161,4 +162,21 @@ template<typename T>
 void MergeSort(T arr[], int n)
 {
 	__mergeSort(arr, 0, n-1);//注意左闭右闭
+}
+
+//自底向上的归并排序
+template<typename T>
+void MergeSortBU(T arr[], int n)
+{
+	// 优化1
+	// 对于小数组, 使用插入排序优化
+	for( int i = 0 ; i < n ; i += 16 )
+		InsertSort(arr,i,min(i+15,n-1));
+
+	for(int sz=16; sz<=n; sz+=sz)
+		for(int i=0; i+sz<n; i+=sz*2)
+			if( arr[i+sz-1] > arr[i+sz] )// 优化2 对于arr[mid] <= arr[mid+1]的情况,不进行merge
+				__merge(arr, i, i+sz-1, min(i+sz*2-1, n-1));//如果i+2*sz-1超过边界就用n-1作为右半部分边界
+
+	return;
 }
