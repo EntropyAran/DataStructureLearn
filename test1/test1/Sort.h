@@ -232,3 +232,50 @@ void QuickSort(T arr[], int n)
 
 	return;
 }
+
+// 双路快速排序的partition
+// 返回p, 使得arr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
+template <typename T>
+int __partition2(T arr[], int l, int r)
+{
+	swap(arr[l], arr[rand()%(r-l+1) + l]);
+	T v = arr[l];
+
+	int i=l+1, j=r;
+	while (true)
+	{
+		while(i<=r && arr[i] <= v) i++;//注意边界
+		while(j>= l+1 && arr[j] >= v) j--;
+		if(i>j) 
+			break;
+
+		//i和j元素相等的情况
+		swap(arr[i], arr[j]); i++; j--;
+	}
+
+	swap(arr[j], arr[l]);
+	return j;
+}
+
+
+//对范围是[l,r]的数组进行快速排序
+template<typename T>
+void __quickSort2(T arr[], int l, int r)
+{
+	if(l >= r)
+		return;
+
+	int p = __partition2(arr, l, r);//p为中间分界线元素v的位置
+	__quickSort2(arr, l, p-1);
+	__quickSort2(arr, p+1, r);
+}
+
+//快速排序
+template<typename T>
+void QuickSort2(T arr[], int n)
+{
+	srand(time(NULL));
+	__quickSort2(arr, 0, n-1);//注意区间
+
+	return;
+}
