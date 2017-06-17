@@ -3,6 +3,7 @@
 //
 
 #include <algorithm>
+#include <ctime>
 
 
 //插入排序
@@ -191,6 +192,8 @@ void MergeSortBU(T arr[], int n)
 template<typename T>
 int __partition(T arr[], int l, int r)
 {
+	swap(arr[rand()%(r-l+1) + l], arr[l]);//选择随机元素作为分界点元素
+
 	T v = arr[l];//选择第一个元素为分界点
 
 	int j = l;// 定义初始化时记得满足定义
@@ -224,6 +227,7 @@ void __quickSort(T arr[], int l, int r)
 template<typename T>
 void QuickSort(T arr[], int n)
 {
+	srand(time(NULL));
 	__quickSort(arr, 0, n-1);//注意区间
 
 	return;
