@@ -15,7 +15,7 @@ void InsertSort( T arr[], int n)
 	{
 		int j;
 		temp = arr[i];
-		for ( j=i; j>0 && temp < arr[j-1]; j--)
+		for ( j=i; j>0 && arr[j-1] > temp; j--)
 			arr[j] = arr[j-1];
 
 		arr[j] = temp;
@@ -34,7 +34,7 @@ void InsertSort( T arr[], int l, int r)
 	{
 		int j;
 		temp = arr[i];
-		for ( j=i; j>l && temp < arr[j-1]; j--)
+		for ( j=i; j>l && arr[j-1] > temp; j--)
 			arr[j] = arr[j-1];
 
 		arr[j] = temp;
@@ -72,6 +72,8 @@ void BubbleSort( T arr[], int n)
 				swap(arr[j], arr[j+1]);
 			}
 		}
+
+	return;
 }
 
 //希尔排序
@@ -84,7 +86,7 @@ void ShellSort(T arr[], int n)
 			int j;
 			T temp = arr[i];
 			// 对 arr[i], arr[i-h], arr[i-2*h], arr[i-3*h]... 使用插入排序
-			for(j=i; j>=gap && arr[j-gap]>temp; j-=gap )
+			for(j=i; j>=gap && arr[j-gap] > temp; j-=gap )
 				arr[j] = arr[j-gap];
 
 			arr[j] = temp;
@@ -99,6 +101,7 @@ void __merge(T arr[], int l, int mid, int r)
 {
 	T *aux = new T[r-l+1];
 
+	//增加一段内存复制当前的数组供排序用
 	for(int i=l; i<=r; i++)
 		aux[i-l] = arr[i];
 
@@ -162,6 +165,8 @@ template<typename T>
 void MergeSort(T arr[], int n)
 {
 	__mergeSort(arr, 0, n-1);//注意左闭右闭
+
+	return;
 }
 
 //自底向上的归并排序
@@ -177,6 +182,49 @@ void MergeSortBU(T arr[], int n)
 		for(int i=0; i+sz<n; i+=sz*2)
 			if( arr[i+sz-1] > arr[i+sz] )// 优化2 对于arr[mid] <= arr[mid+1]的情况,不进行merge
 				__merge(arr, i, i+sz-1, min(i+sz*2-1, n-1));//如果i+2*sz-1超过边界就用n-1作为右半部分边界
+
+	return;
+}
+
+// 对arr[l...r]部分进行partition操作并返回p, 即中间分界线的元素v的位置
+// 同时处理数组使得arr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
+template<typename T>
+int __partition(T arr[], int l, int r)
+{
+	T v = arr[l];//选择第一个元素为分界点
+
+	int j = l;// 定义初始化时记得满足定义
+	for (int i = l+1; i <= r; i++)//i为每次比较的元素位置
+	{
+		//处理中始终保持[l+1,j]<v, [j+1,i-1]>v
+		if (arr[i] < v)//大于v时直接什么也不做向后拓展右半部分即可
+		{
+			swap(arr[i], arr[j+1]);
+			j++;
+		}
+	}
+
+	swap(arr[l], arr[j]);
+	return j;
+}
+
+//对范围是[l,r]的数组进行快速排序
+template<typename T>
+void __quickSort(T arr[], int l, int r)
+{
+	if(l >= r)
+		return;
+
+	int p = __partition(arr, l, r);//p为中间分界线元素v的位置
+	__quickSort(arr, l, p-1);
+	__quickSort(arr, p+1, r);
+}
+
+//快速排序
+template<typename T>
+void QuickSort(T arr[], int n)
+{
+	__quickSort(arr, 0, n-1);//注意区间
 
 	return;
 }
