@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	MaxHeap<int> *heap = new MaxHeap<int>(10);
+	MaxHeap<int> *heap = new MaxHeap<int>(100);
 	srand(time(NULL));
 
 	for (int i=0; i<30; i++)
@@ -19,7 +19,6 @@ int main(int argc, char* argv[])
 	}
 	
 	cout << heap->size() <<endl;
-	heap->testPrint();
 	system("pause");
 	return 0;
 }

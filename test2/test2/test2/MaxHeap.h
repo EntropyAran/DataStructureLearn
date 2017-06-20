@@ -1,7 +1,9 @@
 
 #include <assert.h>
 #include <string>
+
 using namespace std;
+
 template<typename Item>
 class MaxHeap//最大堆类
 {
@@ -30,13 +32,25 @@ public:
 		return count == 0;
 	}
 
-	void insert(Item item)
+	void insert(Item item)//插入元素
 	{
 		assert(count+1 <= capacity);
 				
 		count ++;
 		data[count] = item;//注意最大堆从下标1开始！！
 		shiftUP(count);
+	}
+
+	Item ExtractMax()//弹出元素
+	{
+		assert(count >1);
+
+		Item ret = data[1];
+		count --;
+		swap(data[1], data[count+1]);
+		shiftDown(1);
+
+		return ret;
 	}
 
 private:
@@ -51,6 +65,23 @@ private:
 		{
 			swap(data[k/2], data[k]);
 			k /= 2;
+		}
+	}
+
+	void shiftDown(int k)
+	{
+		int j = 2*k;//接下来要交换的元素data[j]
+
+		while (2*k <= count)//当左孩子存在时继续循环
+		{
+			if(data[j+1] > data[j] && j+1 <= count)//右孩子大于左孩子时跟右孩子交换
+				j++;
+
+			if (data[k] > data[j])//当到达合适位置时停止
+				break;
+
+			swap(data[k], data[j]);
+			k = j;
 		}
 	}
 
