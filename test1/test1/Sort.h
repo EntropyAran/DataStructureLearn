@@ -281,3 +281,18 @@ void QuickSort2(T arr[], int n)
 
 	return;
 }
+
+#include "MaxHeap.h"
+
+//×î´ó¶ÑÅÅÐò
+template<typename T>
+void HeapSort1(T arr[], int n)//
+{
+	MaxHeap<T> *maxheap = new MaxHeap<T>(n);
+	for (int i=0; i<n; i++)
+		maxheap->insert(arr[i]);
+
+	for (int i=n-1; i>=0; i--)
+		arr[i] = maxheap->ExtractMax();
+}
+

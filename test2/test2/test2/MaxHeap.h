@@ -43,7 +43,7 @@ public:
 
 	Item ExtractMax()//弹出元素
 	{
-		assert(count >1);
+		assert(count > 0);
 
 		Item ret = data[1];
 		count --;
@@ -70,10 +70,9 @@ private:
 
 	void shiftDown(int k)
 	{
-		int j = 2*k;//接下来要交换的元素data[j]
-
 		while (2*k <= count)//当左孩子存在时继续循环
 		{
+			int j = 2*k;//接下来要交换的元素data[j]
 			if(data[j+1] > data[j] && j+1 <= count)//右孩子大于左孩子时跟右孩子交换
 				j++;
 
