@@ -27,6 +27,7 @@ int main()
 	int* arr5 = new int[num];CopyArray(arr1,arr5,num);
 	int* arr6 = new int[num];CopyArray(arr1,arr6,num);
 	int* arr7 = new int[num];CopyArray(arr1,arr7,num);
+	int* arr8 = new int[num];CopyArray(arr1,arr8,num);
 
 	//testSort("InsertSort", InsertSort, arr1, num);
 	//testSort("SelectionSort", SelectionSort, arr2, num);
@@ -34,7 +35,8 @@ int main()
 	testSort("ShellSort", ShellSort, arr4, num);
 	testSort("MergeSort", MergeSort, arr5, num);
 	testSort("QuickSort", QuickSort2, arr6, num);
-	testSort("HeapSort", HeapSort1, arr7, num);
+	testSort("HeapSort1", HeapSort1, arr7, num);
+	testSort("HeapSort2", HeapSort2, arr8, num);
 	//PrintArr(arr, num);
 
 	delete []arr1;arr1 = NULL;
@@ -44,6 +46,7 @@ int main()
 	delete []arr5;arr5 = NULL;
 	delete []arr6;arr6 = NULL;
 	delete []arr7;arr7 = NULL;
+	delete []arr8;arr8 = NULL;
 	system("pause");
 	return 1;
 }

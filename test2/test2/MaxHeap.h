@@ -12,9 +12,22 @@ public:
 public:
 	MaxHeap(int capacity)
 	{
-		data = new int[capacity+1];//最大树存储数组从1下标开始！！！
+		data = new Item[capacity+1];//最大树存储数组从1下标开始！！！
 		count = 0;
 		this->capacity = capacity;
+	}
+
+	MaxHeap(Item arr[], int n)
+	{
+		data = new Item[n+1];
+		count = n;
+		capacity = n;
+		for (int i=0; i<n; i++)
+			data[i+1] = arr[i];
+
+		for (int i=count/2; i>=0; i--)
+			shiftDown(i);
+		
 	}
 
 	~MaxHeap()

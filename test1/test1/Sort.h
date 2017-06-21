@@ -282,11 +282,11 @@ void QuickSort2(T arr[], int n)
 	return;
 }
 
-#include "MaxHeap.h"
+#include "../../test2/test2/MaxHeap.h"
 
 //×î´ó¶ÑÅÅÐò
 template<typename T>
-void HeapSort1(T arr[], int n)//
+void HeapSort1(T arr[], int n)
 {
 	MaxHeap<T> *maxheap = new MaxHeap<T>(n);
 	for (int i=0; i<n; i++)
@@ -296,3 +296,10 @@ void HeapSort1(T arr[], int n)//
 		arr[i] = maxheap->ExtractMax();
 }
 
+template<typename T>
+void HeapSort2(T arr[], int n)
+{
+	MaxHeap<T> *maxheap = new MaxHeap<T>(arr, n);
+	for(int i=n-1; i>=0; i--)
+		arr[i] = maxheap->ExtractMax();
+}
